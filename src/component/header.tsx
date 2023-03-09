@@ -13,6 +13,7 @@ const links = [
 export default function Header() {
   const router = useRouter();
   const [activeLink, setActiveLink] = useState('');
+  const [label, setLabel] = useState('');
 
   const handleClick = (href: string) => {
     setActiveLink(href);
@@ -44,8 +45,8 @@ export default function Header() {
               <div 
                 key={href}
                 onClick={() => handleClick(href)}
-                className={router.pathname === href || activeLink === href ? 'underline underline-offset-8' : ''
-              }>
+                className={router.pathname === href || activeLink === href ? 'text-sm font-semibold leading-6 text-gray-900 underline underline-offset-8' : ''}
+              >
                 <Link className="text-sm font-semibold leading-6 text-gray-900" href={href}>
                   {label}
                 </Link>

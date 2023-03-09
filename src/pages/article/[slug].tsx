@@ -5,12 +5,13 @@ import { useRouter } from 'next/router'
 import Dummy from '@/image/dummy.png'
 import Image from 'next/image'
 import Link from 'next/link'
+import { postByID, PopularNews } from '@/utils/ArticleInterface'
 
 export default function SinglePost() {
     const router = useRouter();
     const { id } = router.query;
     //bayangkan anda sudah membarikan fetch post per id
-    const items = [
+    const items: postByID[] = [
       {
         id: id,
         author: "Ferdi Sambo",
@@ -41,21 +42,25 @@ export default function SinglePost() {
       },
     ];
 
-    const populerNews = [
+    const populerNews: PopularNews[] = [
       {
         id: 1,
+        img: Dummy,
         title: 'Judul blog yang akan di fetch oleh axios dari next js ke laravel endpoint'
       },
       {
         id: 2,
+        img: Dummy,
         title: 'tutorial menjadi programmer handal'
       },
       {
         id: 3,
+        img: Dummy,
         title: 'cara konversi dosa ke xp coc'
       },
       {
         id: 4,
+        img: Dummy,
         title: 'tutorial menjadi kucing.exe'
       },
     ]
@@ -94,7 +99,11 @@ export default function SinglePost() {
                         href="#link-blog">
                         <div className="grid grid-rows-1 grid-flow-col pb-2">
                           <div className="bg-white w-[90px] row-span-2">
-                            <div className="box-content h-[75px] w-[75px] rounded-lg bg-gray-300 hover:bg-gray-500 rounded"></div>
+                            <Image 
+                              src={item.img}
+                              alt="dummy.png"
+                              className="box-content h-[75px] w-[75px] rounded-lg bg-gray-300 hover:bg-gray-500 rounded"
+                            />
                           </div>
                           <h1 className="content-center text-black font-extralight col-span-2">
                             {item.title}

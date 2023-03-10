@@ -4,7 +4,7 @@ import {} from 'next/router'
 interface Article {
     id: number,
     title: string,
-    content: string,
+    category: string,
     date: string,
     img: StaticImageData,
 }
@@ -24,7 +24,7 @@ interface PopularNews {
     title: string,
 }
 
-export type { Article, PopularNews}
+export type { Article, PopularNews, postByID };
 
 
 

@@ -7,18 +7,22 @@ import { useState } from 'react';
 const links = [
   { href: '/', label: 'Beranda' },
   { href: '/review', label: 'Review' },
-  { href: '/tipsdantricks', label: 'Tips & Tricks' },
+  { href: '/tipsdantutorial', label: 'Tips & Tutorial' },
 ];
 
 export default function Header() {
   const router = useRouter();
   const [activeLink, setActiveLink] = useState('');
-  const [label, setLabel] = useState('');
 
-  const handleClick = (href: string) => {
+  const handleClick = (href: string, label: string) => {
     setActiveLink(href);
+    router.push({
+      pathname: href,
+      query: { title: label}
+    })
   };
     return (
+      <>
         <header className="bg-white">
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
@@ -40,24 +44,28 @@ export default function Header() {
               </svg>
             </button>
           </div>
-          <div className="hidden lg:flex lg:gap-x-12">
-            {links.map(({ href, label }) => (
-              <div 
-                key={href}
-                onClick={() => handleClick(href)}
-                className={router.pathname === href || activeLink === href ? 'text-sm font-semibold leading-6 text-gray-900 underline underline-offset-8' : ''}
-              >
-                <Link className="text-sm font-semibold leading-6 text-gray-900" href={href}>
-                  {label}
-                </Link>
-              </div>
-            ))}
-            <a href="https://www.jennyhouse.id/" className="text-sm font-semibold leading-6 text-gray-900">Shop</a>
+          <div 
+            className="hidden lg:flex lg:gap-x-12">
+                {links.map(({ href, label }) => (
+                  <div 
+                    key={href}
+                    onClick={() => handleClick(href, label)}
+                    className={router.pathname === href || activeLink === href ? 'text-sm font-semibold leading-6 text-red-300 underline underline-offset-8' : ''}
+                  >
+                    <Link className="text-base font-semibold leading-6 text-red-300" href={href}>
+                      {label}
+                    </Link>
+                  </div>
+                ))}
+                <a href="https://www.jennyhouse.id/" className="text-base font-semibold leading-6 text-red-300" target="_blank" rel="noopener noreferrer">Shop</a>
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" className="text-sm font-semibold leading-6 text-red-300">+62 822 8888​ 5456</a>
+            <div className="border-2 p-2 border-red-300 bg-white hover:bg-red-200 rounded-full text-red-300">
+              <button type="button" className="text-base font-semibold leading-6 text-red-300 hover:text-white">Work With Us</button>
+            </div>
           </div>
         </nav>
       </header>
+      </>
     )
 }

@@ -5,45 +5,34 @@ import Link from 'next/link'
 import Dummy from '@/image/dummy.png'
 import Image from 'next/image'
 import { Article, PopularNews } from '@/utils/ArticleInterface'
-import { useRouter } from 'next/router'
+import HeroCard from '@/component/card_hero'
 
 
 export default function Page() {
-  const router = useRouter()
-  const { data } = router.query
-
   const article: Article[] = [
     {
       id: 1,
       img: Dummy,
       title: "judul-blog-yang-akan-di-fetch-oleh-axios-dari-next-js-ke-laravel-endpoint", 
-      content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-      molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-      numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-      optio, eaque rerum!`,
+      category: "Kategori",
       date: ''
     },
     {
       id: 2,
       img: Dummy,
       title: "contoh judul 2", 
-      content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-      molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-      numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-      optio, eaque rerum!`,
+      category: "Kategori",
       date: ''
     },
     {
       id: 3,
       img: Dummy,
       title: "contoh judul 3", 
-      content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-      molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-      numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-      optio, eaque rerum!`,
+      category: "Kategori",
       date: ''
     }
   ]
+
   const populerNews: PopularNews[] = [
     {
       id: 1,
@@ -72,6 +61,7 @@ export default function Page() {
       <>
         <Head></Head>
         <Header></Header>
+        <HeroCard></HeroCard>
         <div className="bg-white">
           <div className="p-6 lg:px-8 md:flex md:items-center md:justify-between md:p-6 white mx-auto flexmx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
             <div className="grid grid-cols-2">
@@ -90,7 +80,7 @@ export default function Page() {
                             className="box-content rounded-lg h-[240px] w-[352px] m-1 bg-gray-300 hover:bg-gray-500 rounded" />
                           <div className="text-black pt-2">
                             <h1 className="text-black font-bold text-2xl pb-3">{item.title}</h1>
-                            {item.content}
+                            {item.category}
                             <p className="text-black font-extralight pt-5"> 9 Maret 2023</p>
                           </div>
                         </div>
@@ -102,11 +92,11 @@ export default function Page() {
               <div className="grid gird-cols-1 place-items-start pl-[16rem]">
                 <ul>
                   <li>
-                    <h1 className="text-xl font-bold text-black underline underline-offset-8 mb-5">Blog Populer</h1>
+                    <h1 className="text-3xl pb-5 font-bold text-red-300 underline underline-offset-8 mb-5">Blog Populer</h1>
                     {populerNews.map(item => (
                       <Link
                         key={item.id}
-                        href="#link-blog">
+                        href={`/article/${item.title}`}>
                         <div className="grid grid-rows-1 grid-flow-col pb-2">
                           <div className="bg-white w-[90px] row-span-2">
                             <Image 
@@ -115,7 +105,7 @@ export default function Page() {
                               className="box-content h-[75px] w-[75px] rounded-lg bg-gray-300 hover:bg-gray-500 rounded"
                             />
                           </div>
-                          <h1 className="content-center text-black font-extralight col-span-2">
+                          <h1 className="content-center text-black font-black col-span-2">
                             {item.title}
                           </h1>
                         </div>

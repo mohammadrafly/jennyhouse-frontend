@@ -138,17 +138,23 @@ export default function SinglePost() {
                 <div className="pb-3">
                   <div className="bg-red-300 w-[800px] h-1"></div>
                 </div>
-                <div className="grid grid-cols-2">
+                <div className="grid grid-cols-2 gap-5 w-[800px]">
                   {article.map(item => (
                     <Link
                       key={item.title}
-                      href={`/article/${item.title}`}>
-                      <div className="grid grid-cols-2 w-[800px]">
+                      href={`/article/${item.title}`}
+                      className=""
+                    >
                         <Image
                           src={Dummy}
                           alt="dummy.png"
-                          className="box-content rounded-lg h-[240px] w-[352px] m-1 bg-gray-300 hover:bg-gray-500 rounded" />
-                      </div>
+                          className="box-content rounded-lg h-[240px] w-[352px] m-1 bg-gray-300 hover:bg-gray-500 rounded" 
+                        />
+                        <div className="text-black pt-2">
+                          <h1 className="text-black font-bold text-2xl pb-3">{item.title}</h1>
+                            {item.category}
+                          <p className="text-black font-extralight pt-5">{item.date}</p>
+                        </div>
                     </Link>
                   ))}
                 </div>

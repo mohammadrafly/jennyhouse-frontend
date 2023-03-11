@@ -134,15 +134,12 @@ export default function SinglePost() {
           <div className="p-6 lg:px-8 md:flex md:items-center md:justify-between md:p-6 white mx-auto flexmx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
             <ul className="w-96">
               <li>
-                <h1 className="text-3xl font-bold text-red-300 mb-2">Rekomendasi Produk Haircare Untuk Rambut Kusut Dan Kering</h1>
-                <div className="pb-3">
-                  <div className="bg-red-300 w-[800px] h-1"></div>
-                </div>
+                <h1 className="text-3xl font-bold text-black mb-2 w-[800px] pb-3">Rekomendasi Produk Haircare untuk Rambut Kusut dan Kering</h1>
                 <div className="grid grid-cols-2 gap-5 w-[800px]">
                   {article.map(item => (
                     <Link
                       key={item.title}
-                      href={`/article/${item.title}`}
+                      href={`https://www.jennyhouse.id/cosmetics`}
                       className=""
                     >
                         <Image
@@ -155,18 +152,15 @@ export default function SinglePost() {
                             {item.category}
                           <p className="text-black font-extralight pt-5">{item.date}</p>
                         </div>
+                        
+                        <div className="pt-5 pb-5 flex justify-self-start">
+                          <div className="border-2 pb-3 pt-3 pr-10 pl-10 border-red-300 bg-white hover:bg-red-200 rounded-full text-red-300 duration-300">
+                            <button type="button" className="text-xl font-medium leading-6 text-red-300 hover:text-white duration-300">Buy Now</button>
+                          </div>
+                        </div>
                     </Link>
                   ))}
                 </div>
-                <Link
-                  href={`/blog-terkini`}
-                >
-                  <div className="pt-5 pb-5 flex justify-self-start">
-                    <div className="border-2 pb-3 pt-3 pr-10 pl-10 border-red-300 bg-white hover:bg-red-200 rounded-full text-red-300 duration-300">
-                      <button type="button" className="text-xl font-medium leading-6 text-red-300 hover:text-white duration-300">Buy Now</button>
-                    </div>
-                  </div>
-                </Link>
               </li>
             </ul>
           </div>

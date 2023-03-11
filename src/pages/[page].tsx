@@ -6,7 +6,7 @@ import Dummy from '@/image/dummy.png'
 import Image from 'next/image'
 import { Article, PopularNews } from '@/utils/ArticleInterface'
 import HeroCard from '@/component/card_hero'
-
+import Hero2 from '@/component/hero2'
 
 export default function Page() {
   const article: Article[] = [
@@ -62,7 +62,9 @@ export default function Page() {
         <Head></Head>
         <Header></Header>
         <HeroCard></HeroCard>
+        <Hero2></Hero2>
         <div className="bg-white">
+          
           <div className="p-6 lg:px-8 md:flex md:items-center md:justify-between md:p-6 white mx-auto flexmx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
             <div className="grid grid-cols-2">
               <div className="grid grid-cols-3 place-items-start">

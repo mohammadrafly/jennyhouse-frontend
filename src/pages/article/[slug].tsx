@@ -5,7 +5,8 @@ import { useRouter } from 'next/router'
 import Dummy from '@/image/dummy.png'
 import Image from 'next/image'
 import Link from 'next/link'
-import { postByID, PopularNews } from '@/utils/ArticleInterface'
+import { postByID, PopularNews, Article } from '@/utils/ArticleInterface'
+
 
 export default function SinglePost() {
     const router = useRouter();
@@ -64,6 +65,22 @@ export default function SinglePost() {
         title: 'tutorial menjadi kucing.exe'
       },
     ]
+    const article: Article[] = [
+      {
+        id: 1,
+        img: Dummy,
+        title: "judul-blog-yang-akan-di-fetch-oleh-axios-dari-next-js-ke-laravel-endpoint", 
+        category: "Kategori",
+        date: '9 Desember 2025'
+      },
+      {
+        id: 2,
+        img: Dummy,
+        title: "contoh judul 2", 
+        category: "Kategori",
+        date: '9 Desember 2025'
+      },
+    ]
 
     return (
       <>
@@ -74,7 +91,7 @@ export default function SinglePost() {
             <div className="grid grid-cols-2">
               <div className="grid grid-cols-3 place-items-start">
                 {items.map(item => (
-                  <div 
+                  <div
                     key={item.id}
                     className="w-[800px]"
                   >
@@ -83,8 +100,7 @@ export default function SinglePost() {
                     <Image
                       src={Dummy}
                       alt="dummy.png"
-                      className="rounded-lg"
-                    />
+                      className="rounded-lg" />
                     <p className="text-black pt-10">{item.content}</p>
                   </div>
                 ))}
@@ -99,11 +115,10 @@ export default function SinglePost() {
                         href={`/article/${item.title}`}>
                         <div className="grid grid-rows-1 grid-flow-col pb-2">
                           <div className="bg-white w-[90px] row-span-2">
-                            <Image 
+                            <Image
                               src={item.img}
                               alt="dummy.png"
-                              className="box-content h-[75px] w-[75px] rounded-lg bg-gray-300 hover:bg-gray-500 rounded"
-                            />
+                              className="box-content h-[75px] w-[75px] rounded-lg bg-gray-300 hover:bg-gray-500 rounded" />
                           </div>
                           <h1 className="content-center text-black font-black col-span-2">
                             {item.title}
@@ -115,6 +130,39 @@ export default function SinglePost() {
                 </ul>
               </div>
             </div>
+          </div>
+          <div className="p-6 lg:px-8 md:flex md:items-center md:justify-between md:p-6 white mx-auto flexmx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+            <ul className="w-96">
+              <li>
+                <h1 className="text-3xl font-bold text-red-300 mb-2">Rekomendasi Produk Haircare Untuk Rambut Kusut Dan Kering</h1>
+                <div className="pb-3">
+                  <div className="bg-red-300 w-[800px] h-1"></div>
+                </div>
+                <div className="grid grid-cols-2">
+                  {article.map(item => (
+                    <Link
+                      key={item.title}
+                      href={`/article/${item.title}`}>
+                      <div className="grid grid-cols-2 w-[800px]">
+                        <Image
+                          src={Dummy}
+                          alt="dummy.png"
+                          className="box-content rounded-lg h-[240px] w-[352px] m-1 bg-gray-300 hover:bg-gray-500 rounded" />
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <Link
+                  href={`/blog-terkini`}
+                >
+                  <div className="pt-5 pb-5 flex justify-self-start">
+                    <div className="border-2 pb-3 pt-3 pr-10 pl-10 border-red-300 bg-white hover:bg-red-200 rounded-full text-red-300 duration-300">
+                      <button type="button" className="text-xl font-medium leading-6 text-red-300 hover:text-white duration-300">Buy Now</button>
+                    </div>
+                  </div>
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
         <Footer></Footer>

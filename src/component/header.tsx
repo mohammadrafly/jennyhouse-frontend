@@ -59,11 +59,13 @@ export default function Header() {
                 ))}
                 <a href="https://www.jennyhouse.id/" className="text-base font-semibold leading-6 text-red-300" target="_blank" rel="noopener noreferrer">Shop</a>
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <Link className="hidden lg:flex lg:flex-1 lg:justify-end "target="_blank" rel="noopener noreferrer"
+          href={`https://www.jennyhouse.id/contactus`}
+          > 
             <div className="border-2 p-2 border-red-300 bg-white hover:bg-red-200 rounded-full text-red-300">
               <button type="button" className="text-base font-semibold leading-6 text-red-300 hover:text-white">Work With Us</button>
             </div>
-          </div>
+          </Link>
         </nav>
       </header>
       </>

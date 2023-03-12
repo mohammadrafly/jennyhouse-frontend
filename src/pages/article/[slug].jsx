@@ -23,7 +23,7 @@ const SinglePost = ({ fetchAllData, post }) =>  {
           <div className="p-6 lg:px-8 md:flex md:items-center md:justify-between md:p-6 white mx-auto flexmx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
             <div className="grid grid-cols-2">
               <div className="grid grid-cols-3 place-items-start">
-                {post.map(item => (
+                {post.slice(0,1).map(item => (
                   <div
                     key={item.post_slug}
                     className="w-[800px]"
@@ -75,7 +75,7 @@ const SinglePost = ({ fetchAllData, post }) =>  {
               <li>
                 <h1 className="text-3xl font-bold text-black mb-2 w-[800px] pb-3">Rekomendasi Produk</h1>
                 <div className="grid grid-cols-2 gap-5 w-[800px]">
-                {post.slice(0, 1).map(item => (
+                {post.map(item => (
                     <Link
                       key={item.t_product}
                       href={`/article/${item.t_product}`}

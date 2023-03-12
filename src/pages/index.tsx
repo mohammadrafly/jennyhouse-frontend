@@ -10,7 +10,7 @@ import Image from 'next/image'
 async function fetchData() {
   const fetchAllData = await fetch("http://api.pupakindonesia.xyz/api/posts").then((res) => res.json());
   const fetchDataReview = await fetch("http://api.pupakindonesia.xyz/api/categories/review").then((res) => res.json());
-  const fetchDataTipsDanTutorial = await fetch("http://api.pupakindonesia.xyz/api/categories/tipsdantutorial").then((res) => res.json());
+  const fetchDataTipsDanTutorial = await fetch("http://api.pupakindonesia.xyz/api/categories/tips-dan-tutorial").then((res) => res.json());
 
   return {
     fetchAllData,
@@ -36,7 +36,7 @@ function Home({ fetchAllData, fetchDataReview, fetchDataTipsDanTutorial }) {
                     <div className="pb-3">
                       <div className="bg-red-300 w-[800px] h-1"></div>
                     </div>
-                    {fetchAllData.map(item => (
+                    {fetchAllData.slice(0,2).map(item => (
                       <Link 
                         key={item.title}
                         href={`/article/${item.post_slug}`}>
@@ -70,7 +70,7 @@ function Home({ fetchAllData, fetchDataReview, fetchDataTipsDanTutorial }) {
                     <div className="pb-3">
                       <div className="bg-red-300 w-[800px] h-1"></div>
                     </div>
-                    {fetchDataReview.map(item => (
+                    {fetchDataReview.slice(0,2).map(item => (
                       <Link 
                         key={item.title}
                         href={`/article/${item.post_slug}`}>
@@ -104,7 +104,7 @@ function Home({ fetchAllData, fetchDataReview, fetchDataTipsDanTutorial }) {
                     <div className="pb-3">
                       <div className="bg-red-300 w-[800px] h-1"></div>
                     </div>
-                    {fetchDataTipsDanTutorial.map(item => (
+                    {fetchDataTipsDanTutorial.slice(0,2).map(item => (
                       <Link 
                         key={item.title}
                         href={`/article/${item.post_slug}`}>
@@ -139,7 +139,7 @@ function Home({ fetchAllData, fetchDataReview, fetchDataTipsDanTutorial }) {
                 <ul>
                   <li>
                     <h1 className="text-3xl pb-5 font-bold text-red-300 underline underline-offset-8 mb-5">Blog Populer</h1>
-                    {fetchAllData.map(item => (
+                    {fetchAllData.slice(0,4).map(item => (
                       <Link
                         key={item.id}
                         href={`/article/${item.post_slug}`}>

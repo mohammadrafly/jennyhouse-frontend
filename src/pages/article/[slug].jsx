@@ -4,7 +4,6 @@ import Footer from '@/component/footer'
 import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router';
 
 async function fetchData() {
   const fetchSingleData = await fetch("http://api.pupakindonesia.xyz/api/posts/awdaw-awdaw-awdaw-awd").then((res) => res.json());

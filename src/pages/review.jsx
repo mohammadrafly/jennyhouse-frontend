@@ -32,7 +32,6 @@ function Review({ fetchAllData, fetchDataReview}) {
               <div className="grid grid-cols-3 place-items-start">
                 <ul className="w-96">
                   <li>
-                    <h1 className="text-xl font-bold text-black underline underline-offset-8 mb-5">Review</h1>
                     {fetchDataReview.map(item => (
                       <Link 
                         key={item.title}

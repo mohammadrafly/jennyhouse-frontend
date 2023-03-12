@@ -34,7 +34,7 @@ function TipsDanTutorial({ fetchAllData, fetchDataTipsDanTutorial}) {
                 <ul className="w-96">
                   <li>
                     <h1 className="text-xl font-bold text-black underline underline-offset-8 mb-5">Tips & Tutorial</h1>
-                    {fetchDataTipsDanTutorial.slice(0,6).map(item => (
+                    {fetchDataTipsDanTutorial.map(item => (
                       <Link 
                         key={item.title}
                         href={`/article/${item.post_slug}`}>

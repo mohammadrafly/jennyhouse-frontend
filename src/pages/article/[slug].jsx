@@ -15,6 +15,7 @@ async function fetchData() {
   };
 }
 
+
 function SinglePost({ fetchSingleData, fetchAllData }) {
     const base_url = 'http://api.pupakindonesia.xyz/uploads/';
 

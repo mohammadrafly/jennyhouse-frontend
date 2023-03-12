@@ -8,79 +8,13 @@ import Link from 'next/link'
 import { postByID, PopularNews, Article } from '@/utils/ArticleInterface'
 
 
-export default function SinglePost() {
+function SinglePost({ post }) {
     const router = useRouter();
-    const { id } = router.query;
-    //bayangkan anda sudah membarikan fetch post per id
-    const items: postByID[] = [
-      {
-        id: 1,
-        author: "Ferdi Sambo",
-        date: "9 Maret 2023",
-        img: Dummy,
-        title: "judul-blog-yang-akan-di-fetch-oleh-axios-dari-next-js-ke-laravel-endpoint", 
-        content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
-        sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-        recusandae alias error harum maxime adipisci amet laborum. Perspiciatis 
-        minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit 
-        quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur 
-        fugiat, temporibus enim commodi iusto libero magni deleniti quod quam 
-        consequuntur! Commodi minima excepturi repudiandae velit hic maxime
-        doloremque. Quaerat provident commodi consectetur veniam similique ad 
-        earum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo 
-        fugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore 
-        suscipit quas? Nulla, placeat. Voluptatem quaerat non architecto ab laudantium
-        modi minima sunt esse temporibus sint culpa, recusandae aliquam numquam 
-        totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam 
-        quasi aliquam eligendi, placeat qui corporis!`
-      },
-    ];
+    const base_url = 'http://api.pupakindonesia.xyz/uploads/';
 
-    const populerNews: PopularNews[] = [
-      {
-        id: 1,
-        img: Dummy,
-        title: 'Judul blog yang akan di fetch oleh axios dari next js ke laravel endpoint'
-      },
-      {
-        id: 2,
-        img: Dummy,
-        title: 'tutorial menjadi programmer handal'
-      },
-      {
-        id: 3,
-        img: Dummy,
-        title: 'cara konversi dosa ke xp coc'
-      },
-      {
-        id: 4,
-        img: Dummy,
-        title: 'tutorial menjadi kucing.exe'
-      },
-    ]
-    const article: Article[] = [
-      {
-        id: 1,
-        img: Dummy,
-        title: "judul-blog-yang-akan-di-fetch-oleh-axios-dari-next-js-ke-laravel-endpoint", 
-        category: "Kategori",
-        date: '9 Desember 2025'
-      },
-      {
-        id: 2,
-        img: Dummy,
-        title: "contoh judul 2", 
-        category: "Kategori",
-        date: '9 Desember 2025'
-      },
-    ]
+    if (router.isFallback) {
+      return <div>Loading...</div>;
+    }
 
     return (
       <>
@@ -90,15 +24,15 @@ export default function SinglePost() {
           <div className="p-6 lg:px-8 md:flex md:items-center md:justify-between md:p-6 white mx-auto flexmx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
             <div className="grid grid-cols-2">
               <div className="grid grid-cols-3 place-items-start">
-                {items.map(item => (
+                {post.map(item => (
                   <div
-                    key={item.id}
+                    key={item.post_slug}
                     className="w-[800px]"
                   >
-                    <div className="text-black font-bold text-4xl">{item.title}</div>
-                    <p className="text-black font-thin pt-1">{item.author} | {item.date}</p>
+                    <div className="text-black font-bold text-4xl">{item.title_post}</div>
+                    <p className="text-black font-thin pt-1">{item.author} | {item.post_date}</p>
                     <Image
-                      src={Dummy}
+                      src={base_url+item.header_image}
                       alt="dummy.png"
                       className="rounded-lg" />
                     <p className="text-black pt-10">{item.content}</p>
@@ -109,14 +43,14 @@ export default function SinglePost() {
                 <ul>
                   <li>
                     <h1 className="text-3xl pb-5 font-bold text-red-300 underline underline-offset-8 mb-5">Blog Populer</h1>
-                    {populerNews.map(item => (
+                    {post.map(item => (
                       <Link
                         key={item.id}
                         href={`/article/${item.title}`}>
                         <div className="grid grid-rows-1 grid-flow-col pb-2">
                           <div className="bg-white w-[90px] row-span-2">
                             <Image
-                              src={item.img}
+                              src={base_url+item.header_image}
                               alt="dummy.png"
                               className="box-content h-[75px] w-[75px] rounded-lg bg-gray-300 hover:bg-gray-500 rounded" />
                           </div>
@@ -136,14 +70,14 @@ export default function SinglePost() {
               <li>
                 <h1 className="text-3xl font-bold text-black mb-2 w-[800px] pb-3">Rekomendasi Produk Haircare untuk Rambut Kusut dan Kering</h1>
                 <div className="grid grid-cols-2 gap-5 w-[800px]">
-                  {article.map(item => (
+                  {post.map(item => (
                     <Link
                       key={item.title}
                       href={`https://www.jennyhouse.id/cosmetics`}
                       className=""
                     >
                         <Image
-                          src={Dummy}
+                          src={base_url+item.header_image}
                           alt="dummy.png"
                           className="box-content rounded-lg h-[240px] w-[352px] m-1 bg-gray-300 hover:bg-gray-500 rounded" 
                         />
@@ -169,3 +103,15 @@ export default function SinglePost() {
       </>
     )
 }
+export async function getServerSideProps({ params }) {
+  const res = await fetch(`http://api.pupakindonesia.xyz/api/posts/${params.post_slug}`);
+  const post = await res.json();
+
+  return {
+    props: {
+      post,
+    },
+  };
+}
+
+export default SinglePost

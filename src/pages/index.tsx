@@ -7,47 +7,20 @@ import Dummy from '@/image/dummy.png'
 import Link from 'next/link'
 import Image from 'next/image'
 
-export default function Home() {
-  const article: Article[] = [
-    {
-      id: 1,
-      img: Dummy,
-      title: "judul-blog-yang-akan-di-fetch-oleh-axios-dari-next-js-ke-laravel-endpoint", 
-      category: "Kategori",
-      date: '9 Desember 2025'
-    },
-    {
-      id: 2,
-      img: Dummy,
-      title: "contoh judul 2", 
-      category: "Kategori",
-      date: '9 Desember 2025'
-    },
-  ]
+async function fetchData() {
+  const fetchAllData = await fetch("http://api.pupakindonesia.xyz/api/posts").then((res) => res.json());
+  const fetchDataReview = await fetch("http://api.pupakindonesia.xyz/api/categories/review").then((res) => res.json());
+  const fetchDataTipsDanTutorial = await fetch("http://api.pupakindonesia.xyz/api/categories/tipsdantutorial").then((res) => res.json());
 
-  const populerNews: PopularNews[] = [
-    {
-      id: 1,
-      img: Dummy,
-      title: 'Judul blog yang akan di fetch oleh axios dari next js ke laravel endpoint'
-    },
-    {
-      id: 2,
-      img: Dummy,
-      title: 'tutorial menjadi programmer handal'
-    },
-    {
-      id: 3,
-      img: Dummy,
-      title: 'cara konversi dosa ke xp coc'
-    },
-    {
-      id: 4,
-      img: Dummy,
-      title: 'tutorial menjadi kucing.exe'
-    },
-  ]
+  return {
+    fetchAllData,
+    fetchDataReview,
+    fetchDataTipsDanTutorial,
+  };
+}
 
+function Home({ fetchAllData, fetchDataReview, fetchDataTipsDanTutorial }) {
+  const base_url = 'http://api.pupakindonesia.xyz/uploads/';
   return (
     <>
       <Head></Head>
@@ -63,19 +36,21 @@ export default function Home() {
                     <div className="pb-3">
                       <div className="bg-red-300 w-[800px] h-1"></div>
                     </div>
-                    {article.map(item => (
+                    {fetchAllData.map(item => (
                       <Link 
                         key={item.title}
-                        href={`/article/${item.title}`}>
+                        href={`/article/${item.post_slug}`}>
                         <div className="grid grid-cols-2 w-[800px]">
                           <Image
-                            src={Dummy}
+                            src={base_url+item.header_image}
+                            width={352}
+                            height={240}
                             alt="dummy.png"
                             className="box-content rounded-lg h-[240px] w-[352px] m-1 bg-gray-300 hover:bg-gray-500 rounded" />
                           <div className="text-black pt-2">
-                            <h1 className="text-black font-bold text-2xl pb-3">{item.title}</h1>
-                              {item.category}
-                            <p className="text-black font-extralight pt-5">{item.date}</p>
+                            <h1 className="text-black font-bold text-2xl pb-3">{item.title_post}</h1>
+                              {item.title_categories}
+                            <p className="text-black font-extralight pt-5">{item.post_date}</p>
                           </div>
                         </div>
                       </Link>
@@ -95,19 +70,21 @@ export default function Home() {
                     <div className="pb-3">
                       <div className="bg-red-300 w-[800px] h-1"></div>
                     </div>
-                    {article.map(item => (
+                    {fetchDataReview.map(item => (
                       <Link 
                         key={item.title}
-                        href={`/article/${item.title}`}>
+                        href={`/article/${item.post_slug}`}>
                         <div className="grid grid-cols-2 w-[800px]">
                           <Image
-                            src={Dummy}
+                            src={base_url+item.header_image}
+                            width={352}
+                            height={240}
                             alt="dummy.png"
                             className="box-content rounded-lg h-[240px] w-[352px] m-1 bg-gray-300 hover:bg-gray-500 rounded" />
                           <div className="text-black pt-2">
-                            <h1 className="text-black font-bold text-2xl pb-3">{item.title}</h1>
-                              {item.category}
-                            <p className="text-black font-extralight pt-5">{item.date}</p>
+                            <h1 className="text-black font-bold text-2xl pb-3">{item.title_post}</h1>
+                              {item.title_categories}
+                            <p className="text-black font-extralight pt-5">{item.post_date}</p>
                           </div>
                         </div>
                       </Link>
@@ -127,19 +104,21 @@ export default function Home() {
                     <div className="pb-3">
                       <div className="bg-red-300 w-[800px] h-1"></div>
                     </div>
-                    {article.map(item => (
+                    {fetchDataTipsDanTutorial.map(item => (
                       <Link 
                         key={item.title}
-                        href={`/article/${item.title}`}>
+                        href={`/article/${item.post_slug}`}>
                         <div className="grid grid-cols-2 w-[800px]">
                           <Image
-                            src={Dummy}
+                            src={base_url+item.header_image}
+                            width={352}
+                            height={240}
                             alt="dummy.png"
                             className="box-content rounded-lg h-[240px] w-[352px] m-1 bg-gray-300 hover:bg-gray-500 rounded" />
                           <div className="text-black pt-2">
-                            <h1 className="text-black font-bold text-2xl pb-3">{item.title}</h1>
-                              {item.category}
-                            <p className="text-black font-extralight pt-5">{item.date}</p>
+                            <h1 className="text-black font-bold text-2xl pb-3">{item.title_post}</h1>
+                              {item.title_categories}
+                            <p className="text-black font-extralight pt-5">{item.post_date}</p>
                           </div>
                         </div>
                       </Link>
@@ -160,20 +139,22 @@ export default function Home() {
                 <ul>
                   <li>
                     <h1 className="text-3xl pb-5 font-bold text-red-300 underline underline-offset-8 mb-5">Blog Populer</h1>
-                    {populerNews.map(item => (
+                    {fetchAllData.map(item => (
                       <Link
                         key={item.id}
-                        href={`/article/${item.title}`}>
+                        href={`/article/${item.post_slug}`}>
                         <div className="grid grid-rows-1 grid-flow-col pb-2">
                           <div className="bg-white w-[90px] row-span-2">
                             <Image 
-                              src={item.img}
+                              src={base_url+item.header_image}
                               alt="dummy.png"
+                              width={75}
+                              height={75}
                               className="box-content h-[75px] w-[75px] rounded-lg bg-gray-300 hover:bg-gray-500 rounded"
                             />
                           </div>
                           <h1 className="content-center text-black font-black col-span-2">
-                            {item.title}
+                            {item.title_post}
                           </h1>
                         </div>
                       </Link>
@@ -188,3 +169,16 @@ export default function Home() {
     </>
   )
 }
+
+export async function getServerSideProps() {
+  const { fetchAllData, fetchDataReview, fetchDataTipsDanTutorial } = await fetchData();
+  return { 
+    props: { 
+      fetchAllData,
+      fetchDataReview, 
+      fetchDataTipsDanTutorial
+    } 
+  }
+}
+
+export default Home

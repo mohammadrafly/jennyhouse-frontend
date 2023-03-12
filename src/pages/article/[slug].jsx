@@ -6,18 +6,15 @@ import React from 'react'
 import Link from 'next/link'
 
 async function fetchData() {
-  const fetchSingleData = await fetch("http://api.pupakindonesia.xyz/api/posts/awdaw-awdaw-awdaw-awd").then((res) => res.json());
-  const fetchAllData = await fetch("http://api.pupakindonesia.xyz/api/posts/").then((res) => res.json());
+  const fetchAllData = await fetch("https://api.pupakindonesia.xyz/api/posts/").then((res) => res.json());
   return {
-    fetchSingleData,
     fetchAllData
   };
 }
 
-
-function SinglePost({ fetchSingleData, fetchAllData }) {
-    const base_url = 'http://api.pupakindonesia.xyz/uploads/';
-
+const SinglePost = ({ fetchAllData, post }) =>  {
+    const base_url = 'https://api.pupakindonesia.xyz/uploads/';
+    console.log(post);
     return (
       <>
         <Head></Head>
@@ -26,21 +23,23 @@ function SinglePost({ fetchSingleData, fetchAllData }) {
           <div className="p-6 lg:px-8 md:flex md:items-center md:justify-between md:p-6 white mx-auto flexmx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
             <div className="grid grid-cols-2">
               <div className="grid grid-cols-3 place-items-start">
+                {post.map(item => (
                   <div
-                    key={fetchSingleData.slug}
+                    key={item.post_slug}
                     className="w-[800px]"
                   >
-                    <div className="text-black font-bold text-4xl">{fetchSingleData.title}</div>
-                    <p className="text-black font-thin pt-1">{fetchSingleData.author} | {fetchSingleData.created_at}</p>
+                    <div className="text-black font-bold text-4xl">{item.title_post}</div>
+                    <p className="text-black font-thin pt-1">{item.author} | {item.post_date}</p>
                     <Image
-                      src={base_url+fetchSingleData.header_image}
+                      src={base_url+item.header_image}
                       alt="dummy.png"
                       className="rounded-lg"
                       width={800}
                       height={240} 
                     />
-                    <p className="text-black pt-10">{fetchSingleData.content}</p>
+                    <p className="text-black pt-10">{item.content}</p>
                   </div>
+                ))}
               </div>
               <div className="grid gird-cols-1 place-items-start pl-[16rem]">
                 <ul>
@@ -74,9 +73,26 @@ function SinglePost({ fetchSingleData, fetchAllData }) {
           <div className="p-6 lg:px-8 md:flex md:items-center md:justify-between md:p-6 white mx-auto flexmx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
             <ul className="w-96">
               <li>
-                <h1 className="text-3xl font-bold text-black mb-2 w-[800px] pb-3">Rekomendasi Produk Haircare untuk Rambut Kusut dan Kering</h1>
+                <h1 className="text-3xl font-bold text-black mb-2 w-[800px] pb-3">Rekomendasi Produk</h1>
                 <div className="grid grid-cols-2 gap-5 w-[800px]">
-                  
+                {post.slice(0, 1).map(item => (
+                    <Link
+                      key={item.t_product}
+                      href={`/article/${item.t_product}`}
+                    >
+                        <Image
+                          src={base_url+item.img}
+                          alt="dummy.png"
+                          width={352}
+                          height={240}
+                          className="box-content rounded-lg h-[240px] w-[352px] m-1 bg-gray-300 hover:bg-gray-500 rounded" 
+                        />
+                        <div className="text-black pt-2">
+                          <h1 className="text-black font-bold text-2xl pb-3">{item.t_product}</h1>
+                          <p className="text-black font-extralight pt-5">{item.desc}</p>
+                        </div>
+                    </Link>
+                  ))}
                 </div>
               </li>
             </ul>
@@ -87,12 +103,17 @@ function SinglePost({ fetchSingleData, fetchAllData }) {
     )
 }
 
-export async function getServerSideProps() {
-  const { fetchSingleData, fetchAllData } = await fetchData();
+export async function getServerSideProps(context) {
+  const { fetchAllData } = await fetchData();
+  const { slug } = context.query;
+
+  const res = await fetch(`https://api.pupakindonesia.xyz/api/posts/${slug}`);
+  const post = await res.json();
+
   return { 
     props: { 
-      fetchSingleData,
-      fetchAllData
+      fetchAllData,
+      post
     } 
   }
 }

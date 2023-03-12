@@ -2,8 +2,6 @@ import Header from '@/component/header'
 import Footer from '@/component/footer'
 import Hero from '@/component/hero'
 import Head from '@/component/head'
-import { Article, PopularNews} from '@/utils/ArticleInterface'
-import Dummy from '@/image/dummy.png'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -25,7 +23,7 @@ function Home({ fetchAllData, fetchDataReview, fetchDataTipsDanTutorial }) {
     <>
       <Head></Head>
       <Header></Header>
-        <Hero></Hero>
+        <Hero data={fetchAllData}></Hero>
         <div className="bg-white">
           <div className="p-6 lg:px-8 md:flex md:items-center md:justify-between md:p-6 white mx-auto flexmx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
             <div className="grid grid-cols-2">
@@ -37,9 +35,10 @@ function Home({ fetchAllData, fetchDataReview, fetchDataTipsDanTutorial }) {
                       <div className="bg-red-300 w-[800px] h-1"></div>
                     </div>
                     {fetchAllData.slice(0,2).map(item => (
-                      <Link 
-                        key={item.title}
-                        href={`/article/${item.post_slug}`}>
+                      <Link
+                        key={item.post_slug}
+                        href={`/article/${item.post_slug}`}
+                      >
                         <div className="grid grid-cols-2 w-[800px]">
                           <Image
                             src={base_url+item.header_image}

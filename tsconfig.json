@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/index.jsx", "src/pages/article/[slug].jsx", "src/pa", "src/pages/index.jsx", "ges/article/[slug].jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/index.jsx", "src/pages/article/[slug].jsx", "src/pa", "src/pages/index.jsx", "ges/article/[slug].jsx", "src/pages/tipsdantutorial.jsx", "src/pages/review.jsx", "src/pages/review.jsx", "src/component/hero2.jsx", "src/component/hero2.jsx", "src/component/hero.jsx", "src/component/hero.jsx", "src/component/card_hero.jsx", "src/component/card_hero.jsx"],
   "exclude": ["node_modules"]
 }

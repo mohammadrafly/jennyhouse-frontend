@@ -1,34 +1,8 @@
-import Dummy from '@/image/dummy.png'
-import { Article } from '@/utils/ArticleInterface'
 import Image from 'next/image'
 import Link from 'next/link'
-import HeroCard from './card_hero'
 
-export default function hero() {
-    const article: Article[] = [
-        {
-            id: 1,
-            img: Dummy,
-            category: 'test',
-            date: '',
-            title: 'asede tawdasdw asd wamglmklsmkaskmas'
-        },
-        {
-            id: 2,
-            img: Dummy,
-            category: 'test',
-            date: '',
-            title: 'asede tawdasdw asd wamglmklsmkaskmas'
-        },
-        {
-            id: 3,
-            img: Dummy,
-            category: 'test',
-            date: '',
-            title: 'asede tawdasdw asd wamglmklsmkaskmas'
-        }
-    ]
-
+export default function hero({ data }) {
+    const base_url = 'http://api.pupakindonesia.xyz/uploads/';
     return (
         <>
             <div>
@@ -39,40 +13,44 @@ export default function hero() {
                 </div>
                 <div className="bg-white">
                     <div className="mx-auto flex max-w-7xl p-6 pt-5 lg:px-8 relative isolate overflow-hidden items-center justify-center rounded-lg">
-                        {article.slice(0, 1).map(item => (
+                        {data.slice(0, 1).map(item => (
                             <Link 
-                                key={item.title}
-                                href={`/article/${item.title}`}
+                                key={item.post_slug}
+                                href={`/article/${item.post_slug}`}
                             >
                                 <div className="relative group rounded-lg hover:opacity-90 bg-black mr-10 transition-opacity duration-300 opacity-100">
                                     <Image
-                                        src={Dummy}
+                                        src={base_url+item.header_image}
                                         alt="dummy.png"
+                                        width={800}
+                                        height={580}
                                         className="object-cover z-0 box-content h-[580px] w-[800px] rounded-lg"
                                     />
                                     <span className="absolute bg-gradient-to-bl from-gray-900 via-transparent"></span>
                                     <span className="absolute bg-gradient-to-tr from-gray-900 via-transparent"></span>
                                     <div className="absolute inset-0 flex items-center justify-items-start z-20">
-                                        <p className="transform transition hover:scale-110 text-white font-bold text-4xl mt-auto pl-4 pb-4 rounded-lg">{item.title}</p>
+                                        <p className="transform transition hover:scale-110 text-white font-bold text-4xl mt-auto pl-4 pb-4 rounded-lg">{item.title_post}</p>
                                     </div>
                                 </div>
                             </Link>
                         ))}
                         <div className="grid grid-cols-1">
-                            {article.slice(0, 2).map(item => (
+                            {data.slice(0, 2).map(item => (
                                 <Link 
-                                    key={item.title}
-                                    href={`/article/${item.title}`}>
+                                    key={item.post_slug}
+                                    href={`/article/${item.post_slug}`}>
                                     <div className="relative group rounded-lg hover:opacity-90 transition-opacity duration-300 opacity-100">
                                         <Image 
-                                            src={item.img}
+                                            src={base_url+item.header_image}
+                                            width={352}
+                                            height={2275}
                                             alt="dummy.png"
                                             className="box-content h-[275px] w-[352px] m-4 bg-gray-300 hover:bg-gray-500 rounded-lg" 
                                         />
                                         <span className="absolute bg-gradient-to-bl from-gray-900 via-transparent"></span>
                                         <span className="absolute bg-gradient-to-tr from-gray-900 via-transparent"></span>
                                         <div className="absolute pl-2 inset-0 flex items-center justify-items-start z-20">
-                                            <p className="transform transition hover:scale-110 text-white font-bold text-1xl mt-auto pl-4 pb-4 rounded-lg">{item.title}</p>
+                                            <p className="transform transition hover:scale-110 text-white font-bold text-1xl mt-auto pl-4 pb-4 rounded-lg">{item.title_post}</p>
                                         </div>
                                     </div>
                                 </Link>

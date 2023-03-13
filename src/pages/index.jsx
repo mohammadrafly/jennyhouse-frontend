@@ -56,7 +56,7 @@ function Home({ fetchAllData, fetchDataReview, fetchDataTipsDanTutorial }) {
                       </Link>
                     ))}
                     <Link
-                      href={`/blog-terkini`}
+                      href={`/blogterkini`}
                     >
                       <div className="pt-5 pb-5 flex justify-self-start">
                         <div className="border-2 pb-3 pt-3 pr-10 pl-10 border-red-300 bg-white hover:bg-red-200 rounded-full text-red-300 duration-300">

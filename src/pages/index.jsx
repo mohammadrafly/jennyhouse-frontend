@@ -35,7 +35,7 @@ function Home({ fetchAllData, fetchDataReview, fetchDataTipsDanTutorial }) {
                     <div className="pb-3">
                       <div className="bg-red-300 w-[800px] h-1"></div>
                     </div>
-                    {fetchAllData.slice(3,10).map(item => (
+                    {fetchAllData.slice(3,5).map(item => (
                       <Link
                         key={item.id}
                         href={`/article/${item.slug}`}

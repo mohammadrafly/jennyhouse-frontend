@@ -2,7 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['api.pupakindonesia.xyz'],
+    domains: [
+      'api.pupakindonesia.xyz',
+      'laravel.pupakindonesia.xyz'
+    ],
   },
 }
 

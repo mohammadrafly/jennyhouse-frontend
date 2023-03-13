@@ -5,21 +5,19 @@ import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link'
 import he from 'he';
+import ChildArray from '@/component/childArray'
+import PopularBlog from '@/component/popularBlog'
 
 async function fetchData() {
-  const fetchAllData = await fetch("https://api.pupakindonesia.xyz/api/posts/").then((res) => res.json());
+  const fetchAllData = await fetch('https://laravel.pupakindonesia.xyz/public/post/published').then((res) => res.json());
   return {
     fetchAllData
   };
 }
 
-function decodeString(parameter) {
-  const myConstant = he.decode(parameter);
-  return myConstant;
-}
-
 const SinglePost = ({ fetchAllData, post }) =>  {
-    const base_url = 'https://api.pupakindonesia.xyz/uploads/';
+  const base_url = 'https://laravel.pupakindonesia.xyz/public/uploads/';
+  console.log(post)
     return (
       <>
         <Head></Head>
@@ -30,13 +28,13 @@ const SinglePost = ({ fetchAllData, post }) =>  {
               <div className="grid grid-cols-3 place-items-start">
                 {post.slice(0,1).map(item => (
                   <div
-                    key={item.post_slug}
+                    key={item.slug}
                     className="w-[800px]"
                   >
-                    <div className="text-black font-bold text-4xl">{item.title_post}</div>
-                    <p className="text-black font-thin pt-1">{item.author} | {item.post_date}</p>
+                    <div className="text-black font-bold text-4xl">{item.title}</div>
+                    <p className="text-black font-thin pt-1">{item.author} | {item.date}</p>
                     <Image
-                      src={base_url+item.header_image}
+                      src={base_url+item.image}
                       alt="dummy.png"
                       className="rounded-lg"
                       width={800}
@@ -50,26 +48,7 @@ const SinglePost = ({ fetchAllData, post }) =>  {
                 <ul>
                   <li>
                     <h1 className="text-3xl pb-5 font-bold text-red-300 underline underline-offset-8 mb-5">Blog Populer</h1>
-                    {fetchAllData.slice(0, 4).map(item => (
-                      <Link
-                        key={item.id}
-                        href={`/article/${item.post_slug}`}>
-                        <div className="grid grid-rows-1 grid-flow-col pb-2">
-                          <div className="bg-white w-[90px] row-span-2">
-                            <Image 
-                              src={base_url+item.header_image}
-                              alt="dummy.png"
-                              width={75}
-                              height={75}
-                              className="box-content h-[75px] w-[75px] rounded-lg bg-gray-300 hover:bg-gray-500 rounded"
-                            />
-                          </div>
-                          <h1 className="content-center text-black font-black col-span-2">
-                            {item.title_post}
-                          </h1>
-                        </div>
-                      </Link>
-                    ))}
+                    <PopularBlog data={fetchAllData}></PopularBlog>
                   </li>
                 </ul>
               </div>
@@ -80,29 +59,7 @@ const SinglePost = ({ fetchAllData, post }) =>  {
               <li>
                 <h1 className="text-3xl font-bold text-black mb-2 w-[800px] pb-3">Rekomendasi Produk</h1>
                 <div className="grid grid-cols-2 gap-5 w-[800px]">
-                {post.map(item => (
-                    <Link
-                      key={item.t_product}
-                      href={item.link}
-                    >
-                        <Image
-                          src={base_url+item.img}
-                          alt="dummy.png"
-                          width={352}
-                          height={240}
-                          className="box-content rounded-lg h-[240px] w-[352px] m-1 bg-gray-300 hover:bg-gray-500 rounded" 
-                        />
-                        <div className="text-black pt-2">
-                          <h1 className="text-black font-bold text-2xl pb-3">{item.t_product}</h1>
-                          <p className="text-black font-extralight pt-5" dangerouslySetInnerHTML={{ __html: he.decode(item.desc) }}></p>
-                        </div>
-                        <div className="pt-5 pb-5 flex justify-self-start">
-                          <div className="border-2 pb-3 pt-3 pr-10 pl-10 border-red-300 bg-white hover:bg-red-200 rounded-full text-red-300 duration-300">
-                            <button type="button" className="text-xl font-medium leading-6 text-red-300 hover:text-white duration-300">Buy Now</button>
-                          </div>
-                        </div>
-                    </Link>
-                  ))}
+                  <ChildArray data={post}></ChildArray>
                 </div>
               </li>
             </ul>
@@ -117,7 +74,7 @@ export async function getServerSideProps(context) {
   const { fetchAllData } = await fetchData();
   const { slug } = context.query;
 
-  const res = await fetch(`https://api.pupakindonesia.xyz/api/posts/${slug}`);
+  const res = await fetch(`https://laravel.pupakindonesia.xyz/public/post/${slug}`);
   const post = await res.json();
 
   return { 

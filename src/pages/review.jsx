@@ -5,10 +5,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 import HeroCard from '@/component/card_hero'
 import Hero2 from '@/component/hero2'
+import PopularBlog from '@/component/popularBlog'
 
 async function fetchData() {
-    const fetchAllData = await fetch("http://api.pupakindonesia.xyz/api/posts").then((res) => res.json());
-    const fetchDataReview = await fetch("http://api.pupakindonesia.xyz/api/categories/review").then((res) => res.json());
+    const fetchAllData = await fetch('https://laravel.pupakindonesia.xyz/public/post/published').then((res) => res.json());
+    const fetchDataReview = await fetch('https://laravel.pupakindonesia.xyz/public/post/category/review').then((res) => res.json());
   
     return {
       fetchAllData,
@@ -17,14 +18,14 @@ async function fetchData() {
 }
 
 function Review({ fetchAllData, fetchDataReview}) {
-    const base_url = 'http://api.pupakindonesia.xyz/uploads/';
+    const base_url = 'https://laravel.pupakindonesia.xyz/public/uploads/';
     const data = 'Review'
     return (
       <>
         <Head></Head>
         <Header></Header>
         <HeroCard data={data}></HeroCard>
-        <Hero2 data={fetchAllData}></Hero2>
+        <Hero2 data={fetchDataReview}></Hero2>
         <div className="bg-white">
           
           <div className="p-6 lg:px-8 md:flex md:items-center md:justify-between md:p-6 white mx-auto flexmx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
@@ -32,21 +33,20 @@ function Review({ fetchAllData, fetchDataReview}) {
               <div className="grid grid-cols-3 place-items-start">
                 <ul className="w-96">
                   <li>
-                    {fetchDataReview.map(item => (
+                    {fetchDataReview.slice(2, 10).map(item => (
                       <Link 
-                        key={item.title}
-                        href={`/article/${item.post_slug}`}>
+                        key={item.slug}
+                        href={`/article/${item.slug}`}>
                         <div className="grid grid-cols-2 w-[800px]">
                           <Image
-                            src={base_url+item.header_image}
+                            src={base_url+item.image}
                             width={352}
                             height={240}
                             alt="dummy.png"
                             className="box-content rounded-lg h-[240px] w-[352px] m-1 bg-gray-300 hover:bg-gray-500 rounded" />
                           <div className="text-black pt-2">
-                            <h1 className="text-black font-bold text-2xl pb-3">{item.title_post}</h1>
-                              {item.title_categories}
-                            <p className="text-black font-extralight pt-5">{item.post_date}</p>
+                            <h1 className="text-black font-bold text-2xl pb-3">{item.title}</h1>
+                            <p className="text-black font-extralight pt-5">{item.category.name}</p>
                           </div>
                         </div>
                       </Link>
@@ -58,26 +58,7 @@ function Review({ fetchAllData, fetchDataReview}) {
                 <ul>
                   <li>
                     <h1 className="text-3xl pb-5 font-bold text-red-300 underline underline-offset-8 mb-5">Blog Populer</h1>
-                    {fetchAllData.slice(0, 4).map(item => (
-                      <Link
-                        key={item.id}
-                        href={`/article/${item.title_post}`}>
-                        <div className="grid grid-rows-1 grid-flow-col pb-2">
-                          <div className="bg-white w-[90px] row-span-2">
-                            <Image 
-                              src={base_url+item.header_image}
-                              alt="dummy.png"
-                              width={75}
-                              height={75}
-                              className="box-content h-[75px] w-[75px] rounded-lg bg-gray-300 hover:bg-gray-500 rounded"
-                            />
-                          </div>
-                          <h1 className="content-center text-black font-black col-span-2">
-                            {item.title_post}
-                          </h1>
-                        </div>
-                      </Link>
-                    ))}
+                    <PopularBlog data={fetchAllData}></PopularBlog>
                   </li>
                 </ul>
               </div>

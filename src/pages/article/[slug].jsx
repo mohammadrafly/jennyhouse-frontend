@@ -17,7 +17,6 @@ async function fetchData() {
 
 const SinglePost = ({ fetchAllData, post }) =>  {
   const base_url = 'https://laravel.pupakindonesia.xyz/public/uploads/';
-  console.log(post)
     return (
       <>
         <Head></Head>
@@ -28,19 +27,19 @@ const SinglePost = ({ fetchAllData, post }) =>  {
               <div className="grid grid-cols-3 place-items-start">
                 {post.slice(0,1).map(item => (
                   <div
-                    key={item.slug}
+                    key={item.posts_slug}
                     className="w-[800px]"
                   >
-                    <div className="text-black font-bold text-4xl">{item.title}</div>
-                    <p className="text-black font-thin pt-1">{item.author} | {item.date}</p>
+                    <div className="text-black font-bold text-4xl">{item.posts_title}</div>
+                    <p className="text-black font-thin pt-1">{item.users_name} | {item.posts_date}</p>
                     <Image
-                      src={base_url+item.image}
+                      src={base_url+item.posts_image}
                       alt="dummy.png"
                       className="rounded-lg"
                       width={800}
                       height={240} 
                     />
-                      <div className="text-black pt-10" dangerouslySetInnerHTML={{ __html: he.decode(item.content) }} />;
+                      <div className="text-black pt-10" dangerouslySetInnerHTML={{ __html: he.decode(item.posts_content) }} />;
                   </div>
                 ))}
               </div>

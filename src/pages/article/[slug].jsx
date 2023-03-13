@@ -94,7 +94,7 @@ const SinglePost = ({ fetchAllData, post }) =>  {
                         />
                         <div className="text-black pt-2">
                           <h1 className="text-black font-bold text-2xl pb-3">{item.t_product}</h1>
-                          <p className="text-black font-extralight pt-5">{item.desc}</p>
+                          <p className="text-black font-extralight pt-5" dangerouslySetInnerHTML={{ __html: he.decode(item.desc) }}></p>
                         </div>
                         <div className="pt-5 pb-5 flex justify-self-start">
                           <div className="border-2 pb-3 pt-3 pr-10 pl-10 border-red-300 bg-white hover:bg-red-200 rounded-full text-red-300 duration-300">

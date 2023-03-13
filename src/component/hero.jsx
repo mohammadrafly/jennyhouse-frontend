@@ -13,7 +13,7 @@ export default function hero({ data }) {
                 </div>
                 <div className="bg-white">
                     <div className="mx-auto flex max-w-7xl p-6 pt-5 lg:px-8 relative isolate overflow-hidden items-center justify-center rounded-lg">
-                        {data.slice(0, 1).map(item => (
+                        {data.slice(0,1).map(item => (
                             <Link 
                                 key={item.slug}
                                 href={`/article/${item.slug}`}
@@ -35,7 +35,7 @@ export default function hero({ data }) {
                             </Link>
                         ))}
                         <div className="grid grid-cols-1">
-                            {data.slice(1, 2).map(item => (
+                            {data.slice(1, 3).map(item => (
                                 <Link 
                                     key={item.slug}
                                     href={`/article/${item.slug}`}>

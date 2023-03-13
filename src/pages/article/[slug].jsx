@@ -4,6 +4,7 @@ import Footer from '@/component/footer'
 import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link'
+import he from 'he';
 
 async function fetchData() {
   const fetchAllData = await fetch("https://api.pupakindonesia.xyz/api/posts/").then((res) => res.json());
@@ -12,9 +13,13 @@ async function fetchData() {
   };
 }
 
+function decodeString(parameter) {
+  const myConstant = he.decode(parameter);
+  return myConstant;
+}
+
 const SinglePost = ({ fetchAllData, post }) =>  {
     const base_url = 'https://api.pupakindonesia.xyz/uploads/';
-    console.log(post);
     return (
       <>
         <Head></Head>
@@ -37,7 +42,7 @@ const SinglePost = ({ fetchAllData, post }) =>  {
                       width={800}
                       height={240} 
                     />
-                    <p className="text-black pt-10">{item.content}</p>
+                      <div className="text-black pt-10" dangerouslySetInnerHTML={{ __html: he.decode(item.content) }} />;
                   </div>
                 ))}
               </div>

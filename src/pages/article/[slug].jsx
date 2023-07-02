@@ -9,14 +9,14 @@ import ChildArray from '@/component/childArray'
 import PopularBlog from '@/component/popularBlog'
 
 async function fetchData() {
-  const fetchAllData = await fetch('https://laravel.pupakindonesia.xyz/public/post/published').then((res) => res.json());
+  const fetchAllData = await fetch('http://127.0.0.1:8000/post/published').then((res) => res.json());
   return {
     fetchAllData
   };
 }
 
 const SinglePost = ({ fetchAllData, post }) =>  {
-  const base_url = 'https://laravel.pupakindonesia.xyz/public/uploads/';
+  const base_url = 'http://127.0.0.1:8000/uploads/';
     return (
       <>
         <Head></Head>
@@ -73,7 +73,7 @@ export async function getServerSideProps(context) {
   const { fetchAllData } = await fetchData();
   const { slug } = context.query;
 
-  const res = await fetch(`https://laravel.pupakindonesia.xyz/public/post/${slug}`);
+  const res = await fetch(`http://127.0.0.1:8000/post/${slug}`);
   const post = await res.json();
 
   return { 

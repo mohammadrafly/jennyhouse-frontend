@@ -8,8 +8,8 @@ import Hero2 from '@/component/hero2'
 import PopularBlog from '@/component/popularBlog'
 
 async function fetchData() {
-    const fetchAllData = await fetch('https://laravel.pupakindonesia.xyz/public/post/published').then((res) => res.json());
-    const fetchDataTipsDanTutorial = await fetch('https://laravel.pupakindonesia.xyz/public/post/category/tips-dan-tutorial').then((res) => res.json());
+    const fetchAllData = await fetch('http://127.0.0.1:8000/post/published').then((res) => res.json());
+    const fetchDataTipsDanTutorial = await fetch('http://127.0.0.1:8000/post/category/tips-dan-tutorial').then((res) => res.json());
   
     return {
       fetchAllData,
@@ -18,7 +18,7 @@ async function fetchData() {
 }
 
 function TipsDanTutorial({ fetchAllData, fetchDataTipsDanTutorial}) {
-    const base_url = 'https://laravel.pupakindonesia.xyz/public/uploads/';
+    const base_url = 'http://127.0.0.1:8000/uploads/';
     const data = 'Tips & Tutorial'
     return (
       <>

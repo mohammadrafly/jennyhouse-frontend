@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 function hero2({ data }) {
-    const base_url = 'https://laravel.pupakindonesia.xyz/public/uploads/';
+    const base_url = 'http://127.0.0.1:8000/uploads/';
     return (
         <>
                 <div className="bg-white">

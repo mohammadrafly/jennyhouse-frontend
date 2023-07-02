@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const ChildArray = ({ data }) => {
-  const product_url = 'https://laravel.pupakindonesia.xyz/public/uploads/';
+  const product_url = 'http://127.0.0.1:8000/uploads/';
   return (
             <>
               {data.map(item => (

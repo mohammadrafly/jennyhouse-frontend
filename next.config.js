@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  publicRuntimeConfig: {
+    staticFolder: '/static',
+  },
   images: {
-    domains: [
-      'api.pupakindonesia.xyz',
-      'laravel.pupakindonesia.xyz'
-    ],
+    domains: ['127.0.0.1'],
   },
 }
 

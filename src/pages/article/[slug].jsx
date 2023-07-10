@@ -31,7 +31,7 @@ const SinglePost = ({ fetchAllData, post }) =>  {
                     className="w-[800px]"
                   >
                     <div className="text-black font-bold text-4xl">{item.posts_title}</div>
-                    <p className="text-black font-thin pt-1">{item.users_name} | {item.posts_date}</p>
+                    <p className="text-black font-thin pt-1">{item.users_name} - {item.posts_date}</p>
                     <Image
                       src={base_url+item.posts_image}
                       alt="dummy.png"

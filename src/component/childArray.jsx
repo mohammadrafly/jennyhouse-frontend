@@ -18,7 +18,7 @@ const ChildArray = ({ data }) => {
                         height={240}
                         className="box-content rounded-lg h-[240px] w-[352px] m-1 bg-gray-300 hover:bg-gray-500 rounded" />
                     <div className="text-black pt-2">
-                        <h1 className="text-black font-bold text-2xl pb-3">{item.products_title}</h1>
+                        <h1 className="text-black font-bold text-2xl pb-3">{item.products_title} | {item.products_price}</h1>
                         <p className="text-black font-extralight pt-5">{item.products_content}</p>
                     </div>
                     <div className="pt-5 pb-5 flex justify-self-start">
